@@ -20,11 +20,14 @@
                     class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
                 >
                     <ul class="navbar-nav flex-grow-1">
-                        |
-
                         <li class="nav-item">
                             <router-link class="nav-link text-dark" to="/"
                                 >Home</router-link
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <router-link class="nav-link text-dark" to="/listitems"
+                                >ListItems</router-link
                             >
                         </li>
 

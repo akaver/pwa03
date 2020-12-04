@@ -14,7 +14,23 @@ const routes: Array<RouteRecordRaw> = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-    }
+    },
+    {
+        path: '/listitems',
+        name: 'listitemsIndex',
+        component: () => import(/* webpackChunkName: "listitemsIndex" */ '../views/ListItems/Index.vue')
+    },
+    {
+        path: '/listitems/edit/:id',
+        name: 'listitemsEdit',
+        props: true,
+        component: () => import(/* webpackChunkName: "listitemsEdit" */ '../views/ListItems/Edit.vue')
+    },
+    {
+        path: '/listitems/create',
+        name: 'listitemsCreate',
+        component: () => import(/* webpackChunkName: "listitemsCreate" */ '../views/ListItems/Create.vue')
+    },
 ];
 
 const router = createRouter({
