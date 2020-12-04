@@ -1,13 +1,14 @@
 export { };
 
-interface CacheEntry {
+interface ICacheEntry {
     "revision": string;
     "url": string;
 }
 
 declare global {
+    // eslint-disable-next-line @typescript-eslint/interface-name-prefix
     interface WorkerGlobalScope {
-        __precacheManifest: CacheEntry[];
+        __precacheManifest: ICacheEntry[];
         skipWaiting(): Promise<void>;
     }
 }
