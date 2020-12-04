@@ -19,16 +19,7 @@ module.exports = {
         "space-before-function-paren": 'off',
         "comma-dangle": 'off',
         "quotes": 'off',
-        "@typescript-eslint/naming-convention": [
-            "always",
-            {
-                "selector": "interface",
-                "format": ["PascalCase"],
-                "custom": {
-                    "regex": "^I[A-Z]",
-                    "match": true
-                }
-            }
-        ],
+        "@typescript-eslint/interface-name-prefix": ["error", { "prefixWithI": "always" }],
+
     }
 }

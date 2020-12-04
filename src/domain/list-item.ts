@@ -6,4 +6,3 @@ export interface IListItemBase {
 export interface IListItem extends IListItemBase {
     id: number;
 }
-

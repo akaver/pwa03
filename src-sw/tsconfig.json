@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "esnext",
+        "strict": true,
+        "alwaysStrict": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "sourceMap": false,
+        "lib": [
+            "ESNext",
+            "WebWorker"
+        ]
+    },
+    "include": [
+        "global.d.ts",
+        "./*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
