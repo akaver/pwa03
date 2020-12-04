@@ -1,4 +1,4 @@
-importScripts("/docs/precache-manifest.a6299319561a2d274d0c776061c5a244.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/pwa03/precache-manifest.96f5d92ee9e5f77476808cdc6e6e64bf.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 console.log('sw starts');
 workbox.core.setCacheNameDetails({ prefix: "vuepwa" });
@@ -10,4 +10,5 @@ self.addEventListener('message', ((event) => {
         self.skipWaiting();
     }
 }));
+export {};
 

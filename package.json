@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "sw-watch": "tsc --project ./src-sw/tsconfig.json --outDir ./src -w"
+    "sw-watch": "tsc --project ./src-sw/tsconfig.json --outDir ./src -w",
+    "sw-build": "tsc --project ./src-sw/tsconfig.json --outDir ./src"
   },
   "dependencies": {
     "@types/jquery": "^3.5.4",
