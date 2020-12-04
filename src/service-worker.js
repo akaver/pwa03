@@ -1,3 +1,4 @@
+"use strict";
 console.log('sw starts');
 workbox.core.setCacheNameDetails({ prefix: "vuepwa" });
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
@@ -8,4 +9,3 @@ self.addEventListener('message', ((event) => {
         self.skipWaiting();
     }
 }));
-export {};

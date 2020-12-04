@@ -1,18 +1,3 @@
-export { };
-
-interface ICacheEntry {
-    "revision": string;
-    "url": string;
-}
-
-declare global {
-    // eslint-disable-next-line @typescript-eslint/interface-name-prefix
-    interface WorkerGlobalScope {
-        __precacheManifest: ICacheEntry[];
-        skipWaiting(): Promise<void>;
-    }
-}
-
 console.log('sw starts');
 
 workbox.core.setCacheNameDetails({ prefix: "vuepwa" });
