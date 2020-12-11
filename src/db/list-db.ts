@@ -1,11 +1,5 @@
-import { IListItem } from './../src/domain/list-item';
+import { IListItem } from './../domain/list-item';
 import { DBSchema, IDBPDatabase, openDB } from 'idb';
-
-importScripts("/idb.min.js");
-
-console.log('sw starts');
-
-let idb: any;
 
 export enum DdRecordStatus {
     synced = 0,
@@ -31,8 +25,8 @@ export interface IAppDb extends DBSchema {
 };
 
 export const openDatabase = async (): Promise<IDBPDatabase<IAppDb>> => {
-    const db = await idb.openDB('appDb', 1, {
-        upgrade(upgradedDb: IDBPDatabase<IAppDb>) {
+    const db = await openDB<IAppDb>('appDb', 1, {
+        upgrade(upgradedDb) {
             if (upgradedDb.objectStoreNames.contains('listItems')) {
                 db.deleteObjectStore('listItems');
             }
@@ -73,13 +67,35 @@ export const putListItemDb = async (item: IListItem, status: DdRecordStatus): Pr
     return res;
 };
 
-workbox.core.setCacheNameDetails({ prefix: "vuepwa" });
-self.__precacheManifest = [].concat((self.__precacheManifest as never) || []);
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+export const putListItemsDb = async (items: IListItem[], status: DdRecordStatus): Promise<number[]> => {
+    const db = await openDatabase();
+    const transaction = db.transaction('listItems', 'readwrite');
+    const dbPromises: Promise<number | void>[] = [];
+    items.forEach(item => {
+        const dbItem: IDBListItem = {
+            id: item.id,
+            description: item.description,
+            completed: item.completed ? 1 : 0,
+            status: status
+        };
+        dbPromises.push(transaction.store.put(dbItem));
+    });
+    dbPromises.push(transaction.done);
+    const promiseRes = await Promise.all(dbPromises);
+    const res = promiseRes.filter(item => (typeof item) === 'number') as number[];
+    return res;
+};
 
-self.addEventListener('message', ((event: ExtendableMessageEvent) => {
-    console.log('message in sw', event);
-    if (event.data && event.data.action === 'SKIP_WAITING') {
-        self.skipWaiting();
+export const deleteRecordDb = async (id: number) => {
+    const db = await openDatabase();
+    await db.delete('listItems', id);
+};
+
+export const updateRecordStatusDb = async (id: number, status: DdRecordStatus) => {
+    const db = await openDatabase();
+    const dbItem = await db.get('listItems', id);
+    if (dbItem !== undefined) {
+        dbItem.status = status;
+        await putDbListItemDb(dbItem);
     }
-}) as EventListener);
+};
